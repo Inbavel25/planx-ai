@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlanX AI | Student Project Planner</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- PDF Generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>PlanX AI</span>
+        </div>
+
+        <div class="nav-text">
+            AI-Powered Student Project Planner
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+
+    <main class="container">
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <div class="hero-badge">
+                🤖 AI PROJECT PLANNER
+            </div>
+
+            <h1>
+                Turn Your Project Idea
+                <span>Into a Complete Plan.</span>
+            </h1>
+
+            <p>
+                PlanX AI analyzes your skills, project requirements,
+                technologies and available time to create a personalized
+                development roadmap.
+            </p>
+
+        </section>
+
+
+        <!-- Project Input -->
+
+        <section class="input-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-number">01</span>
+
+                    <h2>
+                        Tell us about yourself
+                    </h2>
+
+                    <p>
+                        Enter your details so PlanX AI can personalize
+                        your project plan.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form id="projectForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="studentName">
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="academicYear">
+                            Academic Year
+                        </label>
+
+                        <input
+                            type="text"
+                            id="academicYear"
+                            placeholder="Example: 2nd Year"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="experience">
+                            Experience Level
+                        </label>
+
+                        <select id="experience" required>
+
+                            <option value="Beginner">
+                                Beginner
+                            </option>
+
+                            <option value="Intermediate">
+                                Intermediate
+                            </option>
+
+                            <option value="Advanced">
+                                Advanced
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="skills">
+                            Your Skills
+                        </label>
+
+                        <input
+                            type="text"
+                            id="skills"
+                            placeholder="Java, Python, HTML, CSS"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="interests">
+                            Interests
+                        </label>
+
+                        <input
+                            type="text"
+                            id="interests"
+                            placeholder="AI, Web Development"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Project Details -->
+
+                <div class="sub-heading">
+
+                    <span class="section-number">02</span>
+
+                    <div>
+                        <h2>Project Details</h2>
+
+                        <p>
+                            Tell PlanX AI what you want to build.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="projectName">
+                            Project Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="projectName"
+                            placeholder="Example: AI Waste Classification"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="projectType">
+                            Project Type
+                        </label>
+
+                        <input
+                            type="text"
+                            id="projectType"
+                            placeholder="College Mini Project"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="description">
+                            Project Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            rows="5"
+                            placeholder="Describe your project idea..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="availableDays">
+                            Available Days
+                        </label>
+
+                        <input
+                            type="number"
+                            id="availableDays"
+                            placeholder="45"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="technologies">
+                            Technology Preferences
+                        </label>
+
+                        <input
+                            type="text"
+                            id="technologies"
+                            placeholder="Python, AI, Machine Learning"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="constraints">
+                            Project Constraints
+                        </label>
+
+                        <input
+                            type="text"
+                            id="constraints"
+                            placeholder="Limited time, beginner level"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Analyze Button -->
+
+                <div class="button-area">
+
+                    <button
+                        type="submit"
+                        id="analyzeBtn"
+                    >
+                        <span>✦</span>
+                        Analyze My Project
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- Loading -->
+
+        <section
+            id="loading"
+            class="loading hidden"
+        >
+
+            <div class="loader"></div>
+
+            <h2>
+                PlanX AI is analyzing your project...
+            </h2>
+
+            <p>
+                Our AI agents are preparing your personalized roadmap.
+            </p>
+
+        </section>
+
+
+        <!-- Results -->
+
+        <div id="aiLoading" class="ai-loading">
+    <div class="ai-loading-icon">🤖</div>
+
+    <div class="ai-loading-title">
+        PlanX AI is analyzing your project<span class="ai-loading-dots"></span>
+    </div>
+
+    <div class="ai-loading-text">
+        Analyzing requirements • Checking skills • Building your personalized roadmap
+    </div>
+</div>
+
+        <section
+            id="results"
+            class="results hidden"
+        >
+
+            <div class="results-header">
+
+                <div>
+
+                    <span class="hero-badge">
+                        ✦ ANALYSIS COMPLETE
+                    </span>
+
+                    <h2>
+                        Your Personalized Project Plan
+                    </h2>
+
+                    <p>
+                        PlanX AI has analyzed your project and created
+                        a personalized development roadmap.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Dashboard Cards -->
+
+            <div class="dashboard-grid">
+
+                <div class="dashboard-card">
+
+                    <span class="card-icon">🎯</span>
+
+                    <span class="card-label">
+                        Difficulty
+                    </span>
+
+                    <strong id="difficulty">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <span class="card-icon">📅</span>
+
+                    <span class="card-label">
+                        Available Time
+                    </span>
+
+                    <strong id="availableResult">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <span class="card-icon">🚀</span>
+
+                    <span class="card-label">
+                        Planned Time
+                    </span>
+
+                    <strong id="plannedDays">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <span class="card-icon">🧠</span>
+
+                    <span class="card-label">
+                        Skill Gaps
+                    </span>
+
+                    <strong id="skillGapCount">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Student -->
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    👨‍🎓 Student Information
+                </div>
+
+                <div
+                    id="studentResult"
+                    class="result-content"
+                ></div>
+
+            </div>
+
+
+            <!-- Requirements -->
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    🔍 Requirement Analysis
+                </div>
+
+                <div
+                    id="requirementResult"
+                    class="result-content"
+                ></div>
+
+            </div>
+
+
+            <!-- Technologies -->
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    💻 Recommended Technologies
+                </div>
+
+                <div
+                    id="technologyResult"
+                    class="result-content"
+                ></div>
+
+            </div>
+
+
+            <!-- Project Plan -->
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    📅 Project Plan
+                </div>
+
+                <div
+                    id="projectPlanResult"
+                    class="result-content"
+                ></div>
+
+            </div>
+
+
+            <!-- Learning Plan -->
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    🧠 Learning Plan
+                </div>
+
+                <div
+                    id="learningResult"
+                    class="result-content"
+                ></div>
+
+            </div>
+
+
+            <!-- Resources -->
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    📚 Recommended Resources
+                </div>
+
+                <div
+                    id="resourceResult"
+                    class="result-content"
+                ></div>
+
+            </div>
+
+
+
+
+
+            <!-- Project Timeline -->
+             <section class="timeline-section">
+
+    <h2>📅 Project Timeline</h2>
+
+    <p class="section-description">
+        Your personalized project development timeline
+    </p>
+
+    <div id="projectTimeline"></div>
+
+</section>
+             <!--skill gap analysis-->
+               <section class="skill-gap-section">
+
+    <h2>🧠 Skill Gap Analysis</h2>
+
+    <p class="section-description">
+        Skills you need to develop to successfully complete this project
+    </p>
+
+    <div id="skillGapContainer" class="skill-gap-grid"></div>
+
+</section>
+
+
+            <!-- Execution -->
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    🚀 Execution Roadmap
+                </div>
+
+                <div
+                    id="executionResult"
+                    class="result-content execution-roadmap"
+                ></div>
+
+            </div>
+
+
+            <!-- Start Again -->
+
+            <div class="again-area">
+
+ 
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            ✦ PlanX AI — Personalized Project Planning for Students
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
